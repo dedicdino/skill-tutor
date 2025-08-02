@@ -1,0 +1,6 @@
+@SkillTutor_HostAddress = http://localhost:5100
+
+GET {{SkillTutor_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

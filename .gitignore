@@ -1,0 +1,14 @@
+# .NET
+api/bin/
+api/obj/
+
+# Flutter
+ui/.dart_tool/
+ui/.packages
+ui/build/
+ui/.idea/
+ui/.vscode/
+
+# General
+.DS_Store
+*.log
