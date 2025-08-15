@@ -2,11 +2,11 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillTutor.Api", "SkillTutor.Api\SkillTutor.Api.csproj", "{3EA9E2E1-B27E-4437-A17A-8CE958BD8519}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillTutor.Database", "SkillTutor.Database\SkillTutor.Database.csproj", "{B8F7C9A2-1234-5678-9ABC-DEF012345678}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillTutor.Infrastructure", "SkillTutor.Infrastructure\SkillTutor.Infrastructure.csproj", "{B8F7C9A2-1234-5678-9ABC-DEF012345678}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillTutor.Models", "SkillTutor.Models\SkillTutor.Models.csproj", "{3BE13815-5815-44DA-9111-F7F77EB476FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillTutor.Domain", "SkillTutor.Domain\SkillTutor.Domain.csproj", "{3BE13815-5815-44DA-9111-F7F77EB476FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillTutor.Services", "SkillTutor.Services\SkillTutor.Services.csproj", "{329022F5-5C41-4B93-905D-88888154E257}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkillTutor.Application", "SkillTutor.Application\SkillTutor.Application.csproj", "{329022F5-5C41-4B93-905D-88888154E257}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
