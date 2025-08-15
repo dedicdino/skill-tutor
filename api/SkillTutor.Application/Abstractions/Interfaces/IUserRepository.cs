@@ -1,11 +1,12 @@
-using SkillTutor.Domain.Commands;
 using SkillTutor.Domain.DTO;
 
 namespace SkillTutor.Application.Abstractions.Interfaces;
 
 public interface IUserRepository
 {
-    Task<LoginDTO?> AuthenticateAsync(LoginCommand command);
+    Task<UserDTO?> GetUserByUsernameAsync(string username);
+    Task<bool> ValidatePasswordAsync(string username, string password);
+    Task<IList<string>> GetUserRolesAsync(string username);
 }
 
 

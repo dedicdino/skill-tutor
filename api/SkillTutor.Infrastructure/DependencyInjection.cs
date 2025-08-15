@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SkillTutor.Application.Abstractions.Interfaces;
 using SkillTutor.Infrastructure.Repositories;
 using SkillTutor.Infrastructure.Persistence.Entities;
+using SkillTutor.Infrastructure.Services;
 
 namespace SkillTutor.Infrastructure;
 
@@ -20,6 +21,7 @@ public static class DependencyInjection
             .AddEntityFrameworkStores<SkillTutorDbContext>();
 
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IJwtService, JwtService>();
 
         return services;
     }
