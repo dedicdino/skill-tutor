@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SkillTutor.Database;
+using SkillTutor.Infrastructure;
 
 namespace SkillTutor.Api.Extensions;
 

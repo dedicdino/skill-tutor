@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SkillTutor.Database;
+using SkillTutor.Infrastructure;
 
 #nullable disable
 
-namespace SkillTutor.Database.Migrations
+namespace SkillTutor.Infrastructure.Migrations
 {
     [DbContext(typeof(SkillTutorDbContext))]
-    [Migration("20250807085621_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250814122230_RemoveSeedDataFromModel")]
+    partial class RemoveSeedDataFromModel
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -158,7 +158,7 @@ namespace SkillTutor.Database.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SkillTutor.Models.Core.User", b =>
+            modelBuilder.Entity("SkillTutor.Infrastructure.Persistence.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -181,6 +181,9 @@ namespace SkillTutor.Database.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -244,7 +247,7 @@ namespace SkillTutor.Database.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SkillTutor.Models.Core.User", null)
+                    b.HasOne("SkillTutor.Infrastructure.Persistence.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -253,7 +256,7 @@ namespace SkillTutor.Database.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SkillTutor.Models.Core.User", null)
+                    b.HasOne("SkillTutor.Infrastructure.Persistence.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -268,7 +271,7 @@ namespace SkillTutor.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SkillTutor.Models.Core.User", null)
+                    b.HasOne("SkillTutor.Infrastructure.Persistence.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -277,7 +280,7 @@ namespace SkillTutor.Database.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SkillTutor.Models.Core.User", null)
+                    b.HasOne("SkillTutor.Infrastructure.Persistence.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

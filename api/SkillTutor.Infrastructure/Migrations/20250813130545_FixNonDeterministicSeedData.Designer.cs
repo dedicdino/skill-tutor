@@ -3,17 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SkillTutor.Database;
+using SkillTutor.Infrastructure;
 
 #nullable disable
 
-namespace SkillTutor.Database.Migrations
+namespace SkillTutor.Infrastructure.Migrations
 {
     [DbContext(typeof(SkillTutorDbContext))]
-    partial class SkillTutorDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250813130545_FixNonDeterministicSeedData")]
+    partial class FixNonDeterministicSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,7 +158,7 @@ namespace SkillTutor.Database.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("SkillTutor.Models.Core.User", b =>
+            modelBuilder.Entity("SkillTutor.Infrastructure.Persistence.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -178,6 +181,9 @@ namespace SkillTutor.Database.Migrations
                         .IsRequired()
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -228,6 +234,38 @@ namespace SkillTutor.Database.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "adeee0a6-e793-42fb-a717-4ba9683e8d16",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cbf35b86-20cd-451a-9efb-49f5563986ac",
+                            EmailConfirmed = false,
+                            FirstName = "Desktop",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            PasswordHash = "AfC6BAAQFzGft4B8lqbKdGYb5SJSHiKcsSi5PTfHfHLGSzn+fyCD323C0p/e46oiqD5VoFiG",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4fc6b3de-3217-4703-a859-2c0b5fc05de0",
+                            TwoFactorEnabled = false,
+                            UserName = "desktop"
+                        },
+                        new
+                        {
+                            Id = "c0d2a196-00cb-4918-a77a-40c5f719ec54",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "6a63de3a-0640-4477-ba45-ad356bb30bee",
+                            EmailConfirmed = false,
+                            FirstName = "Mobile",
+                            LastName = "User",
+                            LockoutEnabled = false,
+                            PasswordHash = "AfC6BAAQJ081Wi/1TdZ3TVDNxfYu2rUONLxh2dkMcWXasE1AN7bP5wF8FcC2lEG9QaBsoVf3",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f6cd5f3b-b527-44a5-84a2-fd1eeb334697",
+                            TwoFactorEnabled = false,
+                            UserName = "mobile"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -241,7 +279,7 @@ namespace SkillTutor.Database.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("SkillTutor.Models.Core.User", null)
+                    b.HasOne("SkillTutor.Infrastructure.Persistence.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -250,7 +288,7 @@ namespace SkillTutor.Database.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("SkillTutor.Models.Core.User", null)
+                    b.HasOne("SkillTutor.Infrastructure.Persistence.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -265,7 +303,7 @@ namespace SkillTutor.Database.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("SkillTutor.Models.Core.User", null)
+                    b.HasOne("SkillTutor.Infrastructure.Persistence.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -274,7 +312,7 @@ namespace SkillTutor.Database.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("SkillTutor.Models.Core.User", null)
+                    b.HasOne("SkillTutor.Infrastructure.Persistence.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

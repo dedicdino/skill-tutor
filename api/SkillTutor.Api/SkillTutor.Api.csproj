@@ -7,22 +7,31 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="12.0.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+        <PackageReference Include="dotenv.net" Version="3.1.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.8" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.8">
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
           <PrivateAssets>all</PrivateAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.3" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\SkillTutor.Database\SkillTutor.Database.csproj" />
-      <ProjectReference Include="..\SkillTutor.Models\SkillTutor.Models.csproj" />
+      <ProjectReference Include="..\SkillTutor.Application\SkillTutor.Application.csproj" />
+      <ProjectReference Include="..\SkillTutor.Infrastructure\SkillTutor.Infrastructure.csproj" />
+      
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Controllers\" />
-    </ItemGroup>
+  <ItemGroup>
+    <None Include=".env">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>Always</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
 </Project>

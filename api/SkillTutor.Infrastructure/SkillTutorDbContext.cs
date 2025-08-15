@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SkillTutor.Models.Core;
+using SkillTutor.Infrastructure.Persistence.Entities;
 
-namespace SkillTutor.Database;
+namespace SkillTutor.Infrastructure;
 
 public class SkillTutorDbContext : IdentityDbContext<User>
 {
     public SkillTutorDbContext(
         DbContextOptions<SkillTutorDbContext> options) 
         : base(options) {}
-
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -20,5 +20,6 @@ public class SkillTutorDbContext : IdentityDbContext<User>
         builder.Entity<User>().Property(x => x.LastName)
             .IsRequired()
             .HasMaxLength(30);
+
     }
 }
