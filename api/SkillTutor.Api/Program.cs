@@ -1,14 +1,15 @@
-using System.Text;
 using System.Security.Claims;
+using System.Text;
+using dotenv.net;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SkillTutor.Api.Extensions;
+using SkillTutor.Api.Mapper;
 using SkillTutor.Application.Interfaces;
 using SkillTutor.Application.Services;
 using SkillTutor.Infrastructure;
 using SkillTutor.Infrastructure.Services;
-using dotenv.net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,8 +84,8 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-// In Development, relax Identity password rules to allow simple seeded passwords like "test"
-if (builder.Environment.IsDevelopment())
+// In Development, relax Identity password rules to allow simple seeded passwords
+/*if (builder.Environment.IsDevelopment())
 {
     builder.Services.Configure<Microsoft.AspNetCore.Identity.IdentityOptions>(options =>
     {
@@ -95,10 +96,10 @@ if (builder.Environment.IsDevelopment())
         options.Password.RequiredLength = 4;
         options.Password.RequiredUniqueChars = 1;
     });
-}
+}*/
 
 builder.Services.AddAutoMapper(
-    typeof(SkillTutor.Api.Mapper.MappingProfile).Assembly,
+    typeof(MappingProfile).Assembly,
     typeof(SkillTutor.Infrastructure.Mapper.MappingProfile).Assembly
 );
 
