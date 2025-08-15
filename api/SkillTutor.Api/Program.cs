@@ -99,7 +99,7 @@ builder.Services.AddInfrastructure(builder.Configuration);
 }*/
 
 builder.Services.AddAutoMapper(
-    typeof(MappingProfile).Assembly,
+    typeof(SkillTutor.Api.Mapper.MappingProfile).Assembly,
     typeof(SkillTutor.Infrastructure.Mapper.MappingProfile).Assembly
 );
 
