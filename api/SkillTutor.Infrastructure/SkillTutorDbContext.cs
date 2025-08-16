@@ -4,12 +4,8 @@ using SkillTutor.Infrastructure.Persistence.Entities;
 
 namespace SkillTutor.Infrastructure;
 
-public class SkillTutorDbContext : IdentityDbContext<User>
+public class SkillTutorDbContext(DbContextOptions<SkillTutorDbContext> options) : IdentityDbContext<User>(options)
 {
-    public SkillTutorDbContext(
-        DbContextOptions<SkillTutorDbContext> options) 
-        : base(options) {}
-    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
