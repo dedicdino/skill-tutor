@@ -8,27 +8,20 @@ using SkillTutor.Domain.DTO;
 
 namespace SkillTutor.Infrastructure.Services;
 
-public class JwtService : IJwtService
+public class JwtService(IConfiguration configuration) : IJwtService
 {
-    private readonly IConfiguration _configuration;
-
-    public JwtService(IConfiguration configuration)
-    {
-        _configuration = configuration;
-    }
-
     public LoginDTO GenerateToken(UserDTO user, IList<string> roles)
     {
-        var issuers = _configuration.GetSection("JwtConfig:Issuers").Get<string[]?>();
-        var audiences = _configuration.GetSection("JwtConfig:Audiences").Get<string[]?>();
-        var issuer = issuers != null && issuers.Length > 0
+        var issuers = configuration.GetSection("JwtConfig:Issuers").Get<string[]?>();
+        var audiences = configuration.GetSection("JwtConfig:Audiences").Get<string[]?>();
+        var issuer = issuers is { Length: > 0 }
             ? issuers[0]
-            : _configuration["JwtConfig:Issuer"];
-        var audience = audiences != null && audiences.Length > 0
+            : configuration["JwtConfig:Issuer"];
+        var audience = audiences is { Length: > 0 }
             ? audiences[0]
-            : _configuration["JwtConfig:Audience"];
-        var key = _configuration["JwtConfig:Key"];
-        var tokenValidityMins = _configuration.GetValue<int>("JwtConfig:TokenValidityMins");
+            : configuration["JwtConfig:Audience"];
+        var key = configuration["JwtConfig:Key"];
+        var tokenValidityMins = configuration.GetValue<int>("JwtConfig:TokenValidityMins");
         var tokenExpiryTimeStamp = DateTime.UtcNow.AddMinutes(tokenValidityMins);
 
         var claims = new List<Claim>

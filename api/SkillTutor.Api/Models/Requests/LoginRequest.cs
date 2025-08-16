@@ -1,4 +1,4 @@
-namespace SkillTutor.Api.Models.Authentication;
+namespace SkillTutor.Api.Models.Requests;
 
 public class LoginRequest
 {

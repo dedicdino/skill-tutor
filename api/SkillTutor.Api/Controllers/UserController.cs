@@ -1,24 +1,26 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SkillTutor.Api.Models.Authentication;
+using SkillTutor.Api.Models.Common;
 using SkillTutor.Api.Models.Requests;
+using SkillTutor.Api.Models.Responses;
 using SkillTutor.Api.Services;
 using SkillTutor.Application.Interfaces;
-using SkillTutor.Domain.Commands;
+using SkillTutor.Domain.Constants;
+using SkillTutor.Domain.Queries;
 
 namespace SkillTutor.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AuthController(
+public class UserController(
     IUserService userService,
     IMapper mapper,
-    IValidatorService validatorService) : ControllerBase
+    IValidatorService validatorService) : Controller
 {
-    [AllowAnonymous]
-    [HttpPost("Login")]
-    public async Task<ActionResult<LoginResponse>> Login([FromBody] LoginRequest request)
+    [Authorize(Roles = Roles.Administrator)]
+    [HttpPost("Users")]
+    public async Task<ActionResult<PagedResponse<UserResponse>>> GetUsers([FromBody] UsersRequest request)
     {
         var validation = await validatorService.ValidateAsync(request);
         if (!validation.IsValid)
@@ -26,13 +28,10 @@ public class AuthController(
             return BadRequest(
                 validation.Errors.Select(error => error.ErrorMessage));
         }
-
-        var response = await userService
-            .LoginAsync(mapper.Map<LoginCommand>(request));
-        if (response == null)
-            return Unauthorized();
         
+        var result = await userService.GetUsersAsync(
+            mapper.Map<UsersQuery>(request));
         return Ok(
-            mapper.Map<LoginResponse>(response));
+            mapper.Map<PagedResponse<UserResponse>>(result));
     }
 }

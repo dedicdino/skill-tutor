@@ -7,6 +7,7 @@ public interface IUserRepository
     Task<UserDTO?> GetUserByUsernameAsync(string username);
     Task<bool> ValidatePasswordAsync(string username, string password);
     Task<IList<string>> GetUserRolesAsync(string username);
+    Task<IEnumerable<UserDTO>> GetAllUsersAsync();
 }
 
 

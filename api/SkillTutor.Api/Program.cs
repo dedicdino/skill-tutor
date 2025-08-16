@@ -1,11 +1,13 @@
 using System.Security.Claims;
 using System.Text;
 using dotenv.net;
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using SkillTutor.Api.Extensions;
 using SkillTutor.Api.Mapper;
+using SkillTutor.Api.Services;
 using SkillTutor.Application.Interfaces;
 using SkillTutor.Application.Services;
 using SkillTutor.Infrastructure;
@@ -18,6 +20,7 @@ DotEnv.Load();
 builder.Configuration.AddUserSecrets<Program>(true);
 builder.Configuration.AddEnvironmentVariables();
 
+builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly, includeInternalTypes: true);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -71,7 +74,7 @@ builder.Services.AddAuthentication(options =>
         ValidAudience = jwtAudiences is null ? jwtAudienceSingle : null,
         ValidIssuers = jwtIssuers,
         ValidAudiences = jwtAudiences,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey!)),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,
@@ -99,12 +102,13 @@ builder.Services.AddInfrastructure(builder.Configuration);
 }*/
 
 builder.Services.AddAutoMapper(
-    typeof(SkillTutor.Api.Mapper.MappingProfile).Assembly,
+    typeof(MappingProfile).Assembly,
     typeof(SkillTutor.Infrastructure.Mapper.MappingProfile).Assembly
 );
 
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
+builder.Services.AddScoped<IValidatorService, ValidatorService>();
 
 builder.Services.AddControllers();
 
