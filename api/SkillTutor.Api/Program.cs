@@ -87,7 +87,6 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-// In Development, relax Identity password rules to allow simple seeded passwords
 /*if (builder.Environment.IsDevelopment())
 {
     builder.Services.Configure<Microsoft.AspNetCore.Identity.IdentityOptions>(options =>

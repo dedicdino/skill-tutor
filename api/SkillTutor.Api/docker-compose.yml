@@ -1,0 +1,28 @@
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: SkillTutor.Api/Dockerfile
+    container_name: skilltutor_api
+    ports:
+      - "5100:8080"
+    depends_on:
+      - db
+    environment:
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=db;Database=180161;User Id=sa;Password=MyStr0ng@Pass;TrustServerCertificate=True;
+  
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: skilltutor_db
+    platform: linux/amd64
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=MyStr0ng@Pass
+    volumes:
+      - sql_data:/var/opt/mssql
+
+volumes:
+  sql_data:
