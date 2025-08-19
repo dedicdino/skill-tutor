@@ -14,3 +14,6 @@ ui/.vscode/
 # General
 .DS_Store
 *.log
+
+# Environment variables
+api/**/.env
