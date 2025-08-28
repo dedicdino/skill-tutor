@@ -23,6 +23,16 @@ migrate_working_dir/
 # is commented out by default.
 #.vscode/
 
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
 # Symbolication related
 app.*.symbols
 
@@ -33,33 +43,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-
-### Flutter ###
-# Build outputs
-**/build/
-**/.dart_tool/
-**/.packages
-**/.flutter-plugins
-**/.flutter-plugins-dependencies
-**/.generated/
-
-# Project metadata
-**/.metadata
-**/.idea/
-**/.vscode/
-**/*.iml
-
-# iOS/Android specific
-**/ios/Flutter/Flutter.framework/
-**/ios/Flutter/Flutter.podspec
-**/ios/.symlinks/
-**/ios/Pods/
-**/ios/Runner.xcworkspace/
-**/android/.gradle/
-**/android/app/build/
-
-# Coverage
-**/coverage/
-
-# Others
-**/.DS_Store
